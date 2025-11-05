@@ -69,7 +69,6 @@
         }
 
         #moon-button {
-            /* Moon Button styles remain the same */
             background: none;
             border: none;
             cursor: pointer;
@@ -96,257 +95,40 @@
             transition: background-color 0.5s;
         }
 
-        /* Class for the blood moon effect */
-        #moon-button.blood-moon {
-            background-color: #8b0000; /* Dark red */
-            box-shadow: 0 0 30px #ff0000; /* Red glow */
-        }
-        #moon-button.blood-moon::before {
-             background-color: #0d0d2b; /* Keep the body background color */
-        }
-
-
-        #moon-button:hover {
-            transform: scale(1.05);
-        }
-
-        #moon-button:active {
-            transform: scale(0.95);
-        }
-
-        #satellite {
-            display: none;
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background-color: #ff0000;
-            border-radius: 50%;
-            top: calc(50% - 15px);
-            left: calc(50% - 15px);
-            transform-origin: 115px 115px;
-            animation: orbit 5s linear infinite;
-        }
-
-        @keyframes orbit {
-            from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
-            to { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
-        }
-
-        #shop-container {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            display: none;
-            width: 300px;
-            align-self: center;
-            transition: background-color 0.5s;
-        }
-
-        /* Class for the upgrade store look */
-        #shop-container.upgrade-store {
-            background-color: rgba(139, 0, 0, 0.5); /* Reddish tint */
-        }
-
-        #shop-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        #shop-toggle-btn {
-            background-color: #ffeb3b;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2em;
-        }
-
-        .shop-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: #f4f1c9;
-            color: #0d0d2b;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        .shop-item button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .shop-item button:disabled {
-            background-color: #aaa;
-            cursor: not-allowed;
-        }
-        
-        /* Hide regular items when in upgrade store mode */
-        .regular-shop-item {
-            display: flex; 
-        }
-        .upgrade-store .regular-shop-item {
-            display: none;
-        }
-
-        /* Show upgrade items when in upgrade store mode */
-        .upgrade-shop-item {
-            display: none; 
-        }
-        .upgrade-store .upgrade-shop-item {
-            display: flex;
-        }
-
-
-        #rebirth-button {
-            margin-top: 20px;
-            background-color: #ffeb3b;
-            color: #0d0d2b;
-            border: none;
-            padding: 15px 25px;
-            font-size: 18px;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 0 15px #ffeb3b;
-            display: none;
-            transition: transform 0.2s;
-        }
-
-        #keypad-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(255, 255, 255, 0.3);
-            border: none;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 24px;
-        }
-
-        /* Overlays & Admin Menu styles remain the same */
-        #rebirth-screen, #keypad-screen, #admin-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-        }
-
-        #rebirth-content, #keypad-content, #admin-content {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            color: #0d0d2b;
-            text-align: center;
-        }
-
-        #rebirth-content button, #keypad-content button, #admin-content button {
-            margin: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        #keypad-input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-
-        #admin-message {
-            display: none;
-            margin-top: 10px;
-            padding: 10px;
-            background-color: green;
-            color: white;
-            border-radius: 5px;
-        }
-
-        #give-inf-points-btn, #spawn-star-btn, #spawn-alien-btn {
-            background-color: red;
-            color: white;
-            padding: 15px;
-            font-size: 16px;
-            margin: 5px;
-        }
-
-        .falling-star {
-            position: absolute;
-            background-color: #ffeb3b;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 10px #ffeb3b;
-            width: 20px;
-            height: 20px;
-            z-index: 20;
-            transition: top linear;
-        }
-
-        #alien-message-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 200;
-            font-size: 72px;
-            font-weight: bold;
-            color: #ff0000;
-            text-shadow: 0 0 20px #ff0000;
-            animation: flash 1s infinite alternate;
-        }
-
-        @keyframes flash {
-            from { opacity: 1; }
-            to { opacity: 0.5; }
-        }
-
-        .alien-spaceship {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            right: -150px;
-            width: 100px;
-            height: 60px;
-            background-color: #4CAF50;
-            border-radius: 50% 50% 10px 10px;
-            box-shadow: 0 0 20px #4CAF50;
-            animation: flyAcross 15s linear forwards;
-            z-index: 150;
-        }
-        
-        .alien-spaceship::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 20px;
-            background-color: #fff;
-            border-radius: 50%;
-        }
-
-        @keyframes flyAcross {
-            from { right: -150px; }
-            to { right: 110%; }
+        #moon-button.blood-moon { background-color: #8b0000; box-shadow: 0 0 30px #ff0000; }
+        #moon-button.blood-moon::before { background-color: #0d0d2b; }
+        #moon-button:hover { transform: scale(1.05); }
+        #moon-button:active { transform: scale(0.95); }
+        #satellite { display: none; position: absolute; width: 30px; height: 30px; background-color: #ff0000; border-radius: 50%; top: calc(50% - 15px); left: calc(50% - 15px); transform-origin: 115px 115px; animation: orbit 5s linear infinite; }
+        @keyframes orbit { from { transform: rotate(0deg) translateX(150px) rotate(0deg); } to { transform: rotate(360deg) translateX(150px) rotate(-360deg); } }
+        #shop-container { margin-top: 20px; padding: 20px; background-color: rgba(255, 255, 255, 0.1); border-radius: 10px; display: none; width: 300px; align-self: center; transition: background-color 0.5s; }
+        #shop-container.upgrade-store { background-color: rgba(139, 0, 0, 0.5); }
+        #shop-title { display: flex; justify-content: space-between; align-items: center; }
+        #shop-toggle-btn { background-color: #ffeb3b; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 1.2em; }
+        .shop-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: #f4f1c9; color: #0d0d2b; border-radius: 5px; margin-bottom: 10px; }
+        .shop-item button { background-color: #4CAF50; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px; }
+        .shop-item button:disabled { background-color: #aaa; cursor: not-allowed; }
+        .regular-shop-item { display: flex; } .upgrade-store .regular-shop-item { display: none; }
+        .upgrade-shop-item { display: none; } .upgrade-store .upgrade-shop-item { display: flex; }
+        #rebirth-button { margin-top: 20px; background-color: #ffeb3b; color: #0d0d2b; border: none; padding: 15px 25px; font-size: 18px; border-radius: 50px; cursor: pointer; box-shadow: 0 0 15px #ffeb3b; display: none; transition: transform 0.2s; }
+        #keypad-button { position: absolute; top: 10px; right: 10px; background-color: rgba(255, 255, 255, 0.3); border: none; border-radius: 5px; padding: 10px; cursor: pointer; font-size: 24px; }
+        #rebirth-screen, #keypad-screen, #admin-menu, #nickname-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; z-index: 100; }
+        #rebirth-content, #keypad-content, #admin-content, #nickname-content { background-color: #fff; padding: 30px; border-radius: 10px; color: #0d0d2b; text-align: center; }
+        #rebirth-content button, #keypad-content button, #admin-content button, #nickname-content button { margin: 10px; padding: 10px 20px; cursor: pointer; }
+        #keypad-input, #nickname-input-load, #nickname-input-save { width: 100%; padding: 10px; margin-bottom: 10px; font-size: 18px; }
+        #admin-message { display: none; margin-top: 10px; padding: 10px; background-color: green; color: white; border-radius: 5px; }
+        #give-inf-points-btn, #spawn-star-btn, #spawn-alien-btn { background-color: red; color: white; padding: 15px; font-size: 16px; margin: 5px; }
+        .falling-star { position: absolute; background-color: #ffeb3b; border-radius: 50%; cursor: pointer; box-shadow: 0 0 10px #ffeb3b; width: 20px; height: 20px; z-index: 20; transition: top linear; }
+        #alien-message-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 200; font-size: 72px; font-weight: bold; color: #ff0000; text-shadow: 0 0 20px #ff0000; animation: flash 1s infinite alternate; }
+        @keyframes flash { from { opacity: 1; } to { opacity: 0.5; } }
+        .alien-spaceship { position: fixed; top: 50%; transform: translateY(-50%); right: -150px; width: 100px; height: 60px; background-color: #4CAF50; border-radius: 50% 50% 10px 10px; box-shadow: 0 0 20px #4CAF50; animation: flyAcross 15s linear forwards; z-index: 150; }
+        .alien-spaceship::before { content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 30px; height: 20px; background-color: #fff; border-radius: 50%; }
+        @keyframes flyAcross { from { right: -150px; } to { right: 110%; } }
+        #nickname-button { position: absolute; top: 10px; left: 10px; background-color: rgba(255, 255, 255, 0.3); border: none; border-radius: 5px; padding: 10px; cursor: pointer; font-size: 24px; }
+        .nickname-note {
+            color: blue;
+            font-size: 0.9em;
+            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -354,7 +136,7 @@
     <!-- Container for the stars -->
     <div id="star-container"></div>
 
-    <!-- Overlays (Rebirth, Keypad, Admin) -->
+    <!-- Overlays -->
     <div id="rebirth-screen">
        <div id="rebirth-content">
             <h2>Rebirth</h2>
@@ -385,6 +167,27 @@
     <div id="alien-message-overlay">
         THE ALIEN IS COMING!
     </div>
+    
+    <!-- Nickname/Save Screen Overlay -->
+    <div id="nickname-screen">
+        <div id="nickname-content">
+            <h2>Save/Load Progress</h2>
+            <p class="nickname-note">[Make sure to play the game first and get points before you make your nickname]</p>
+            <div>
+                <h3>What's your saved nickname?</h3>
+                <input type="text" id="nickname-input-load" placeholder="Enter nickname to load data">
+                <button onclick="loadGame()">Load Game</button>
+            </div>
+            <hr>
+            <div>
+                <h3>Make a new nickname?</h3>
+                <input type="text" id="nickname-input-save" placeholder="Enter new nickname to save data">
+                <button onclick="saveGame()">Save Current Game</button>
+            </div>
+            <button onclick="closeNicknameScreen()">Close</button>
+        </div>
+    </div>
+
 
     <!-- Main Layout Container (Game + Shop side-by-side) -->
     <div id="main-layout-container">
@@ -397,6 +200,7 @@
                 <div id="satellite"></div>
                 <button id="rebirth-button" onclick="openRebirthScreen()">🌌 Rebirth</button>
                 <button id="keypad-button" onclick="openKeypadScreen()">🔑</button>
+                <button id="nickname-button" onclick="openNicknameScreen()">😊</button>
                 <div id="admin-message">Admin Menu Unlocked (Press [G] to open, [R] to close)</div>
             </div>
         </div>
@@ -408,7 +212,6 @@
                 <button id="shop-toggle-btn" onclick="toggleShopMode()">🔄</button>
             </div>
             
-            <!-- Regular Shop Items -->
             <div class="shop-item regular-shop-item" id="item-amplifier">
                 <span>Moon Amplifier (+4 per click) (Cost: 20)</span>
                 <button id="buy-amplifier" onclick="buyAmplifier()">Buy</button>
@@ -422,7 +225,6 @@
                 <button id="buy-sun-clicker" onclick="buySunClicker()">Buy</button>
             </div>
 
-            <!-- Upgrade Shop Items -->
             <div class="shop-item upgrade-shop-item" id="item-blood-moon">
                 <span>Blood Moon (50x click & 500/s) (Cost: 1K)</span>
                 <button id="buy-blood-moon" onclick="buyBloodMoon()">Buy</button>
@@ -438,13 +240,15 @@
         let clickMultiplier = 1; // Rebirth multiplier
         let rebirthCount = 0;
         let isAdminUnlocked = false;
-        let temporaryMultiplier = 1; // Alien multiplier
-        let temporaryPPS = 0; // Alien PPS
-        let bloodMoonMultiplier = 1; // Blood moon multiplier
-        let bloodMoonPPS = 0; // Blood moon PPS
-        let isBloodMoonActive = false;
+        let temporaryMultiplier = 1; // Alien multiplier (resets after event)
+        let temporaryPPS = 0; // Alien PPS (resets after event)
+        let bloodMoonMultiplier = 1; // Blood moon multiplier (persists until rebirth)
+        let bloodMoonPPS = 0; // Blood moon PPS (persists until rebirth)
+        let isBloodMoonActive = false; // Status flag for Blood Moon purchase
         const baseRebirthCost = 10000;
         const correctCode = '1234';
+        const cheatCodeNickname = 'sethhasarua1234';
+        const cheatCodePoints = 1000000;
         const alienAnimationDurationMS = 15000;
 
         // DOM Elements
@@ -467,6 +271,9 @@
         const keypadInput = document.getElementById('keypad-input');
         const starContainer = document.getElementById('star-container');
         const alienMessageOverlay = document.getElementById('alien-message-overlay');
+        const nicknameScreen = document.getElementById('nickname-screen');
+        const nicknameInputLoad = document.getElementById('nickname-input-load');
+        const nicknameInputSave = document.getElementById('nickname-input-save');
 
 
         function updateScoreDisplay() {
@@ -475,7 +282,6 @@
             } else {
                 scoreDisplay.textContent = `Points: ${score.toLocaleString()}`;
             }
-            // Total effective multipliers and PPS
             const totalMultiplier = clickMultiplier * temporaryMultiplier * bloodMoonMultiplier;
             multiplierDisplay.textContent = `Click Multiplier: ${totalMultiplier}x`;
         }
@@ -489,86 +295,6 @@
             checkRebirthUnlock();
         }
         
-        function checkRebirthUnlock() {
-             if (score >= getRebirthCost()) {
-                rebirthButton.style.display = 'block';
-             }
-        }
-
-        function checkShopVisibilityAndItems() {
-            // Only show shop if any item (regular or upgrade) is visible
-            const items = [itemAmplifier, itemSatellite, itemSunClicker, itemBloodMoon];
-            const anyItemVisible = items.some(item => item.style.display !== 'none');
-            shopContainer.style.display = anyItemVisible ? 'block' : 'none';
-
-            // Check if user can afford items (infinity check included)
-            document.getElementById('buy-amplifier').disabled = (score < 20 && score !== Infinity);
-            document.getElementById('buy-satellite').disabled = (score < 100 && score !== Infinity);
-            document.getElementById('buy-sun-clicker').disabled = (score < 500 && score !== Infinity);
-            buyBloodMoonButton.disabled = (score < 1000 && score !== Infinity) || isBloodMoonActive;
-        }
-
-        // --- Regular Shop Functions ---
-        function buyAmplifier() {
-            const cost = 20;
-            if (score >= cost || score === Infinity) {
-                if (score !== Infinity) score -= cost;
-                basePointsPerClick = 5;
-                updateScoreDisplay();
-                itemAmplifier.style.display = 'none';
-                checkShopVisibilityAndItems();
-            }
-        }
-        function buySatellite() {
-            const cost = 100;
-            if (score >= cost || score === Infinity) {
-                if (score !== Infinity) score -= cost;
-                pointsPerSecond += 10;
-                updateScoreDisplay();
-                itemSatellite.style.display = 'none';
-                satelliteElement.style.display = 'block';
-                checkShopVisibilityAndItems();
-            }
-        }
-        function buySunClicker() {
-            const cost = 500;
-            if (score >= cost || score === Infinity) {
-                if (score !== Infinity) score -= cost;
-                basePointsPerClick *= 10;
-                updateScoreDisplay();
-                itemSunClicker.style.display = 'none';
-                checkShopVisibilityAndItems();
-            }
-        }
-
-        // --- Upgrade Shop Function ---
-        function buyBloodMoon() {
-            const cost = 1000;
-            if ((score >= cost || score === Infinity) && !isBloodMoonActive) {
-                if (score !== Infinity) score -= cost;
-                isBloodMoonActive = true;
-                bloodMoonMultiplier = 50;
-                bloodMoonPPS = 500;
-                moonButton.classList.add('blood-moon');
-                buyBloodMoonButton.textContent = 'Purchased';
-                checkShopVisibilityAndItems();
-                updateScoreDisplay();
-            }
-        }
-        
-        // Function to toggle shop appearance and content
-        function toggleShopMode() {
-            if (shopContainer.classList.contains('upgrade-store')) {
-                shopContainer.classList.remove('upgrade-store');
-                shopHeader.textContent = 'Shop';
-            } else {
-                shopContainer.classList.add('upgrade-store');
-                shopHeader.textContent = 'Upgrade Store';
-            }
-            checkShopVisibilityAndItems(); // Refresh item visibility and button states
-        }
-
-
         function increaseScorePerSecond() {
             if (score !== Infinity) {
                  const totalPPS = (pointsPerSecond * clickMultiplier * temporaryMultiplier * bloodMoonMultiplier) + temporaryPPS + bloodMoonPPS;
@@ -579,6 +305,32 @@
             checkRebirthUnlock();
         }
 
+        function checkRebirthUnlock() { if (score >= getRebirthCost()) { rebirthButton.style.display = 'block'; } }
+        function checkShopVisibilityAndItems() {
+            const items = [itemAmplifier, itemSatellite, itemSunClicker, itemBloodMoon];
+            const anyItemVisible = items.some(item => item.style.display !== 'none');
+            shopContainer.style.display = anyItemVisible ? 'block' : 'none';
+            document.getElementById('buy-amplifier').disabled = (score < 20 && score !== Infinity);
+            document.getElementById('buy-satellite').disabled = (score < 100 && score !== Infinity);
+            document.getElementById('buy-sun-clicker').disabled = (score < 500 && score !== Infinity);
+            buyBloodMoonButton.disabled = (score < 1000 && score !== Infinity) || isBloodMoonActive;
+        }
+        function buyAmplifier() { const cost = 20; if (score >= cost || score === Infinity) { if (score !== Infinity) score -= cost; basePointsPerClick = 5; updateScoreDisplay(); itemAmplifier.style.display = 'none'; checkShopVisibilityAndItems(); } }
+        function buySatellite() { const cost = 100; if (score >= cost || score === Infinity) { if (score !== Infinity) score -= cost; pointsPerSecond += 10; updateScoreDisplay(); itemSatellite.style.display = 'none'; satelliteElement.style.display = 'block'; checkShopVisibilityAndItems(); } }
+        function buySunClicker() { const cost = 500; if (score >= cost || score === Infinity) { if (score !== Infinity) score -= cost; basePointsPerClick *= 10; updateScoreDisplay(); itemSunClicker.style.display = 'none'; checkShopVisibilityAndItems(); } }
+        function buyBloodMoon() { const cost = 1000; if ((score >= cost || score === Infinity) && !isBloodMoonActive) { if (score !== Infinity) score -= cost; isBloodMoonActive = true; bloodMoonMultiplier = 50; bloodMoonPPS = 500; moonButton.classList.add('blood-moon'); buyBloodMoonButton.textContent = 'Purchased'; checkShopVisibilityAndItems(); updateScoreDisplay(); } }
+        function toggleShopMode() { if (shopContainer.classList.contains('upgrade-store')) { shopContainer.classList.remove('upgrade-store'); shopHeader.textContent = 'Shop'; } else { shopContainer.classList.add('upgrade-store'); shopHeader.textContent = 'Upgrade Store'; } checkShopVisibilityAndItems(); }
+        function confirmRebirth() {
+            const cost = getRebirthCost();
+            if (score >= cost || score === Infinity) {
+                score = 0; rebirthCount++; clickMultiplier += 10;
+                temporaryMultiplier = 1; temporaryPPS = 0; basePointsPerClick = 1; pointsPerSecond = 0;
+                bloodMoonMultiplier = 1; bloodMoonPPS = 0; isBloodMoonActive = false; moonButton.classList.remove('blood-moon'); buyBloodMoonButton.textContent = 'Buy';
+                itemAmplifier.style.display = 'flex'; itemSatellite.style.display = 'flex'; itemSunClicker.style.display = 'flex';
+                satelliteElement.style.display = 'none'; rebirthButton.style.display = 'none'; shopContainer.classList.remove('upgrade-store');
+                updateScoreDisplay(); checkShopVisibilityAndItems(); closeRebirthScreen();
+            } else { alert("You can't afford the rebirth anymore!"); closeRebirthScreen(); }
+        }
         function createStars() {
             const numStars = 100;
             for (let i = 0; i < numStars; i++) {
@@ -592,152 +344,99 @@
                 starContainer.appendChild(star);
             }
         }
-
-        function getRebirthCost() {
-            return baseRebirthCost + (rebirthCount * 5000);
-        }
-
-        function openRebirthScreen() {
-            const cost = getRebirthCost();
-            if (score >= cost || score === Infinity) {
-                document.getElementById('rebirth-cost-display').textContent = cost.toLocaleString();
-                document.getElementById('current-multi-display').textContent = `${clickMultiplier}x`;
-                document.getElementById('new-multi-display').textContent = `${clickMultiplier + 10}x`;
-                rebirthScreen.style.display = 'flex';
-            } else {
-                alert(`You need ${cost.toLocaleString()} points to rebirth!`);
-                checkRebirthUnlock();
-            }
-        }
-
-        function closeRebirthScreen() {
-            rebirthScreen.style.display = 'none';
-        }
-
-        function confirmRebirth() {
-            const cost = getRebirthCost();
-            if (score >= cost || score === Infinity) {
-                score = 0;
-                rebirthCount++;
-                clickMultiplier += 10;
-                
-                // Reset all temporary/purchased buffs on rebirth
-                temporaryMultiplier = 1;
-                temporaryPPS = 0;
-                basePointsPerClick = 1;
-                pointsPerSecond = 0;
-                bloodMoonMultiplier = 1;
-                bloodMoonPPS = 0;
-                isBloodMoonActive = false;
-                moonButton.classList.remove('blood-moon');
-                buyBloodMoonButton.textContent = 'Buy';
-
-
-                // Reset shop item visibility
-                itemAmplifier.style.display = 'flex';
-                itemSatellite.style.display = 'flex';
-                itemSunClicker.style.display = 'flex';
-                // itemBloodMoon visibility is handled by the CSS class system
-
-                satelliteElement.style.display = 'none';
-                rebirthButton.style.display = 'none';
-                shopContainer.classList.remove('upgrade-store'); // Return shop to normal view
-
-                updateScoreDisplay();
-                checkShopVisibilityAndItems();
-                closeRebirthScreen();
-            } else {
-                alert("You can't afford the rebirth anymore!");
-                closeRebirthScreen();
-            }
-        }
-
-        // Keypad and Admin Functions
-        function openKeypadScreen() {
-            keypadInput.value = '';
-            keypadScreen.style.display = 'flex';
-        }
-        function closeKeypadScreen() {
-            keypadScreen.style.display = 'none';
-        }
-        function checkCode() {
-            if (keypadInput.value === correctCode) {
-                isAdminUnlocked = true;
-                adminMessage.style.display = 'block';
-                closeKeypadScreen();
-                alert("Admin menu unlocked! Press [G] to open and [R] to close.");
-            } else {
-                alert("Incorrect code.");
-            }
-        }
-        function giveInfPoints() {
-            score = Infinity;
-            updateScoreDisplay();
-            checkShopVisibilityAndItems();
-        }
-        document.addEventListener('keydown', (event) => {
-            if (isAdminUnlocked) {
-                if (event.key === 'g' || event.key === 'G') {
-                    adminMenu.style.display = 'flex';
-                } else if (event.key === 'r' || event.key === 'R') {
-                    adminMenu.style.display = 'none';
-                }
-            }
-        });
-
-
-        // Falling Star Logic
+        function getRebirthCost() { return baseRebirthCost + (rebirthCount * 5000); }
+        function openRebirthScreen() { const cost = getRebirthCost(); if (score >= cost || score === Infinity) { document.getElementById('rebirth-cost-display').textContent = cost.toLocaleString(); document.getElementById('current-multi-display').textContent = `${clickMultiplier}x`; document.getElementById('new-multi-display').textContent = `${clickMultiplier + 10}x`; rebirthScreen.style.display = 'flex'; } else { alert(`You need ${cost.toLocaleString()} points to rebirth!`); checkRebirthUnlock(); } }
+        function closeRebirthScreen() { rebirthScreen.style.display = 'none'; }
+        function openKeypadScreen() { keypadInput.value = ''; keypadScreen.style.display = 'flex'; }
+        function closeKeypadScreen() { keypadScreen.style.display = 'none'; }
+        function checkCode() { if (keypadInput.value === correctCode) { isAdminUnlocked = true; adminMessage.style.display = 'block'; closeKeypadScreen(); alert("Admin menu unlocked! Press [G] to open and [R] to close."); } else { alert("Incorrect code."); } }
+        function giveInfPoints() { score = Infinity; updateScoreDisplay(); checkShopVisibilityAndItems(); }
+        document.addEventListener('keydown', (event) => { if (isAdminUnlocked) { if (event.key === 'g' || event.key === 'G') { adminMenu.style.display = 'flex'; } else if (event.key === 'r' || event.key === 'R') { adminMenu.style.display = 'none'; } } });
         function spawnFallingStar() {
-            const star = document.createElement('div');
-            star.classList.add('falling-star');
-            const startX = Math.random() * (window.innerWidth - 20);
-            star.style.left = `${startX}px`;
-            star.style.top = `-30px`;
-            const size = Math.random() * 15 + 10;
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
-            document.body.appendChild(star);
-            star.addEventListener('click', () => {
-                if (score !== Infinity) {
-                    const pointsGained = Math.floor(Math.random() * 9901) + 100;
-                    score += pointsGained * clickMultiplier * temporaryMultiplier * bloodMoonMultiplier;
-                }
-                updateScoreDisplay();
-                star.remove();
-            });
-            const viewportHeight = window.innerHeight;
-            const duration = Math.random() * 3 + 3;
-            star.style.transitionDuration = `${duration}s`;
+            const star = document.createElement('div'); star.classList.add('falling-star'); const startX = Math.random() * (window.innerWidth - 20); star.style.left = `${startX}px`; star.style.top = `-30px`; const size = Math.random() * 15 + 10; star.style.width = `${size}px`; star.style.height = `${size}px`; document.body.appendChild(star);
+            star.addEventListener('click', () => { if (score !== Infinity) { const pointsGained = Math.floor(Math.random() * 9901) + 100; score += pointsGained * clickMultiplier * temporaryMultiplier * bloodMoonMultiplier; } updateScoreDisplay(); star.remove(); });
+            const viewportHeight = window.innerHeight; const duration = Math.random() * 3 + 3; star.style.transitionDuration = `${duration}s`;
             setTimeout(() => { star.style.top = `${viewportHeight + 30}px`; }, 10);
             setTimeout(() => { if (star.parentNode) { star.remove(); } }, duration * 1000 + 100);
         }
-        function startAutomaticStarSpawning() {
-            setInterval(spawnFallingStar, Math.random() * 20000 + 10000);
-        }
-        
-        // Alien Event Logic
+        function startAutomaticStarSpawning() { setInterval(spawnFallingStar, Math.random() * 20000 + 10000); }
         function spawnAlienEvent() {
-            alienMessageOverlay.style.display = 'flex';
-            /* Audio Placeholder */
-            console.log("Audio placeholder: An upbeat audio should be playing now.");
-            setTimeout(() => { alienMessageOverlay.style.display = 'none'; }, 6000);
+            alienMessageOverlay.style.display = 'flex'; console.log("Audio placeholder: An upbeat audio should be playing now."); setTimeout(() => { alienMessageOverlay.style.display = 'none'; }, 6000);
+            const alienShip = document.createElement('div'); alienShip.classList.add('alien-spaceship'); document.body.appendChild(alienShip);
+            temporaryMultiplier = 300; temporaryPPS = 10000; updateScoreDisplay();
+            setTimeout(() => { if (alienShip.parentNode) { alienShip.remove(); } temporaryMultiplier = 1; temporaryPPS = 0; updateScoreDisplay(); }, alienAnimationDurationMS); 
+        }
 
-            const alienShip = document.createElement('div');
-            alienShip.classList.add('alien-spaceship');
-            document.body.appendChild(alienShip);
+        // --- Save/Load Functions ---
+        function openNicknameScreen() { nicknameScreen.style.display = 'flex'; }
+        function closeNicknameScreen() { nicknameScreen.style.display = 'none'; }
+
+        function saveGame() {
+            const nickname = nicknameInputSave.value.trim();
+            if (nickname === "") { alert("Please enter a nickname to save!"); return; }
+            if (score === 0 && nickname !== cheatCodeNickname) { alert("You must have some points/progress before saving for the first time!"); return; }
+
+            const gameState = {
+                score: score === Infinity ? 'Infinity' : score, basePointsPerClick, pointsPerSecond, clickMultiplier, rebirthCount,
+                bloodMoonMultiplier, bloodMoonPPS, isBloodMoonActive,
+                itemAmplifierDisplay: itemAmplifier.style.display, itemSatelliteDisplay: itemSatellite.style.display,
+                itemSunClickerDisplay: itemSunClicker.style.display, satelliteElementDisplay: satelliteElement.style.display,
+            };
             
-            temporaryMultiplier = 300;
-            temporaryPPS = 10000;
-            updateScoreDisplay();
-
-            setTimeout(() => {
-                if (alienShip.parentNode) {
-                    alienShip.remove();
+            // Check for the cheat nickname and add the points if it's the first save for this name
+            if (nickname === cheatCodeNickname) {
+                // We add the points to the current score if they are not already there
+                if (gameState.score < cheatCodePoints) {
+                     gameState.score = cheatCodePoints;
                 }
-                temporaryMultiplier = 1;
-                temporaryPPS = 0;
-                updateScoreDisplay();
-            }, alienAnimationDurationMS); 
+            }
+
+            localStorage.setItem(`moonClicker_${nickname}`, JSON.stringify(gameState));
+            alert(`Game saved successfully for nickname: ${nickname}!`);
+            closeNicknameScreen();
+        }
+
+        function loadGame() {
+            const nickname = nicknameInputLoad.value.trim();
+            if (nickname === "") { alert("Please enter your saved nickname!"); return; }
+            const savedData = localStorage.getItem(`moonClicker_${nickname}`);
+            
+            // Handle the case where the saved game doesn't exist, but the nickname is the cheat code
+            if (!savedData && nickname === cheatCodeNickname) {
+                // If they enter the cheat code to load, and it doesn't exist, start a new game with the cheat points
+                score = cheatCodePoints;
+                // Reset everything else to default start state
+                basePointsPerClick = 1;
+                pointsPerSecond = 0;
+                clickMultiplier = 1;
+                rebirthCount = 0;
+                // ... (reset other game state variables)
+                
+                // Then immediately save it under that name so subsequent loads work normally
+                saveGame(); 
+                alert(`Welcome, admin! Starting new game with ${cheatCodePoints.toLocaleString()} points.`);
+
+            } else if (!savedData) {
+                alert(`No saved game found for nickname: ${nickname}`);
+                return;
+            } else {
+                 // Normal load procedure
+                const gameState = JSON.parse(savedData);
+                score = gameState.score === 'Infinity' ? Infinity : gameState.score;
+                basePointsPerClick = gameState.basePointsPerClick; pointsPerSecond = gameState.pointsPerSecond; clickMultiplier = gameState.clickMultiplier;
+                rebirthCount = gameState.rebirthCount; bloodMoonMultiplier = gameState.bloodMoonMultiplier; bloodMoonPPS = gameState.bloodMoonPPS;
+                isBloodMoonActive = gameState.isBloodMoonActive;
+                itemAmplifier.style.display = gameState.itemAmplifierDisplay; itemSatellite.style.display = gameState.itemSatelliteDisplay;
+                itemSunClicker.style.display = gameState.itemSunClickerDisplay; satelliteElement.style.display = gameState.satelliteElementDisplay;
+                if (isBloodMoonActive) { moonButton.classList.add('blood-moon'); buyBloodMoonButton.textContent = 'Purchased'; } else { moonButton.classList.remove('blood-moon'); }
+                temporaryMultiplier = 1; temporaryPPS = 0;
+                alert(`Game loaded successfully for nickname: ${nickname}!`);
+            }
+
+            updateScoreDisplay();
+            checkShopVisibilityAndItems();
+            checkRebirthUnlock();
+            closeNicknameScreen();
         }
 
 

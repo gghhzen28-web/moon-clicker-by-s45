@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moon Clicker Game</title>
+    <style>
+        /* CSS for the starry purple galaxy background */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+
+        body {
+            background-color: #0d0d2b;
+            background-image: radial-gradient(circle at center, #4b0082 0%, #1a0033 50%, #0d0d2b 100%);
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* The main layout container uses flexbox to position game area and shop side-by-side */
+        #main-layout-container {
+            display: flex;
+            width: 100%;
+            justify-content: center; /* Center the main content area */
+            z-index: 10;
+        }
+
+        #content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px 0;
+            box-sizing: border-box;
+            /* width: 100%; REMOVED to allow game-container and shop-container to size appropriately */
+        }
+
+        #game-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            margin-right: 20px; /* Space between game and shop */
+        }
+
+        #score-display {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        #multi-display {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ffeb3b;
+        }
+
+        #moon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.1s ease-in-out;
+            width: 200px;
+            height: 200px;
+            background-color: #f4f1c9;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            overflow: hidden;
+        }
+
+        #moon-button::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            width: 180px;
+            height: 180px;
+            background-color: #0d0d2b;
+            border-radius: 50%;
+        }
+
+        #moon-button:hover {
+            transform: scale(1.05);
+        }
+
+        #moon-button:active {
+            transform: scale(0.95);
+        }
+
+        #satellite {
+            display: none;
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #ff0000;
+            border-radius: 50%;
+            top: calc(50% - 15px);
+            left: calc(50% - 15px);
+            transform-origin: 115px 115px;
+            animation: orbit 5s linear infinite;
+        }
+
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+        }
+
+        /* Shop styles for side positioning */
+        #shop-container {
+            margin-top: 20px; /* Adjusted margin for vertical centering with content */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: none;
+            width: 300px;
+            align-self: center; /* Centers the shop vertically within the flex container */
+        }
+
+        .shop-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f4f1c9;
+            color: #0d0d2b;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .shop-item button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .shop-item button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        #rebirth-button {
+            margin-top: 20px;
+            background-color: #ffeb3b;
+            color: #0d0d2b;
+            border: none;
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 15px #ffeb3b;
+            display: none;
+            transition: transform 0.2s;
+        }
+
+        #rebirth-button:hover {
+            transform: scale(1.05);
+        }
+
+        #keypad-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        /* Overlays */
+        #rebirth-screen, #keypad-screen, #admin-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        #rebirth-content, #keypad-content, #admin-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            color: #0d0d2b;
+            text-align: center;
+        }
+
+        #rebirth-content button, #keypad-content button, #admin-content button {
+            margin: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #keypad-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        #admin-message {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border-radius: 5px;
+        }
+
+        #give-inf-points-btn {
+            background-color: red;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Container for the stars -->
+    <div id="star-container"></div>
+
+    <!-- The rebirth screen overlay -->
+    <div id="rebirth-screen">
+        <div id="rebirth-content">
+            <h2>Rebirth</h2>
+            <p>Are you sure you want to rebirth?</p>
+            <p>Cost: <span id="rebirth-cost-display">10,000</span> points</p>
+            <p>Current Multiplier: <span id="current-multi-display">1x</span></p>
+            <p>New Multiplier: <span id="new-multi-display">10x</span></p>
+            <button onclick="confirmRebirth()">Yes, Rebirth!</button>
+            <button onclick="closeRebirthScreen()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- The keypad screen overlay -->
+    <div id="keypad-screen">
+        <div id="keypad-content">
+            <h2>Enter Code</h2>
+            <input type="password" id="keypad-input" maxlength="4">
+            <button onclick="checkCode()">Submit</button>
+            <button onclick="closeKeypadScreen()">Close</button>
+        </div>
+    </div>
+
+    <!-- The admin menu overlay -->
+    <div id="admin-menu">
+        <div id="admin-content">
+            <h2>Admin Menu</h2>
+            <button id="give-inf-points-btn" onclick="giveInfPoints()">Give Infinite Points</button>
+        </div>
+    </div>
+
+    <!-- Main Layout Container (Game + Shop side-by-side) -->
+    <div id="main-layout-container">
+        <!-- Wrapper that enables vertical centering for the game content -->
+        <div id="content-wrapper">
+            <div id="game-container">
+                <h1>Moon Clicker</h1>
+                <div id="score-display">Points: <span id="score">0</span></div>
+                <div id="multi-display">Click Multiplier: <span id="multiplier">1x</span></div>
+
+                <!-- The moon button -->
+                <button id="moon-button" aria-label="Click the moon to earn points"></button>
+
+                <!-- The satellite element -->
+                <div id="satellite"></div>
+
+                <button id="rebirth-button" onclick="openRebirthScreen()">🌌 Rebirth</button>
+
+                <button id="keypad-button" onclick="openKeypadScreen()">🔑</button>
+                <div id="admin-message">Admin Menu Unlocked (Press [G] to open, [R] to close)</div>
+            </div>
+        </div>
+        
+        <!-- Shop Container (on the side) -->
+        <div id="shop-container">
+            <h2>Shop</h2>
+            <!-- Item 1: Moon Amplifier -->
+            <div class="shop-item" id="item-amplifier">
+                <span>Moon Amplifier (+4 per click) (Cost: 20)</span>
+                <button id="buy-amplifier" onclick="buyAmplifier()">Buy</button>
+            </div>
+            <!-- Item 2: Satellite -->
+            <div class="shop-item" id="item-satellite">
+                <span>Satellite (+10 points/sec) (Cost: 100)</span>
+                <button id="buy-satellite" onclick="buySatellite()">Buy</button>
+            </div>
+                <!-- Item 3: Sun Clicker -->
+                <div class="shop-item" id="item-sun-clicker">
+                <span>Sun Clicker (10x per click) (Cost: 500)</span>
+                <button id="buy-sun-clicker" onclick="buySunClicker()">Buy</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Game logic
+        let score = 0;
+        let basePointsPerClick = 1; // Base points before multipliers
+        let pointsPerSecond = 0;
+        let clickMultiplier = 1; // Multiplier starts at 1x
+        let rebirthCount = 0;
+        let isAdminUnlocked = false;
+        const baseRebirthCost = 10000;
+        const correctCode = '1234';
+
+        const scoreDisplay = document.getElementById('score');
+        const multiplierDisplay = document.getElementById('multiplier');
+        const moonButton = document.getElementById('moon-button');
+        const shopContainer = document.getElementById('shop-container');
+        const itemAmplifier = document.getElementById('item-amplifier');
+        const itemSatellite = document.getElementById('item-satellite');
+        const satelliteElement = document.getElementById('satellite');
+        const itemSunClicker = document.getElementById('item-sun-clicker');
+        const rebirthButton = document.getElementById('rebirth-button');
+        const rebirthScreen = document.getElementById('rebirth-screen');
+        const keypadScreen = document.getElementById('keypad-screen');
+        const adminMenu = document.getElementById('admin-menu');
+        const adminMessage = document.getElementById('admin-message');
+        const keypadInput = document.getElementById('keypad-input');
+        const starContainer = document.getElementById('star-container');
+
+
+        function updateScoreDisplay() {
+            if (score === Infinity) {
+                scoreDisplay.textContent = 'Points: ∞';
+            } else {
+                scoreDisplay.textContent = `Points: ${score.toLocaleString()}`;
+            }
+            multiplierDisplay.textContent = `${clickMultiplier}x`;
+        }
+
+        function clickMoon() {
+            if (score !== Infinity) {
+                score += basePointsPerClick * clickMultiplier;
+            }
+            updateScoreDisplay();
+            checkShopVisibilityAndItems();
+            checkRebirthUnlock();
+        }
+
+        function checkRebirthUnlock() {
+             if (score >= getRebirthCost()) {
+                rebirthButton.style.display = 'block';
+             }
+        }
+
+        function checkShopVisibilityAndItems() {
+            const items = [itemAmplifier, itemSatellite, itemSunClicker];
+            const anyItemVisible = items.some(item => item.style.display !== 'none');
+            shopContainer.style.display = anyItemVisible ? 'block' : 'none';
+
+            document.getElementById('buy-amplifier').disabled = (score < 20 && score !== Infinity);
+            document.getElementById('buy-satellite').disabled = (score < 100 && score !== Infinity);
+            document.getElementById('buy-sun-clicker').disabled = (score < 500 && score !== Infinity);
+        }
+
+        function buyAmplifier() {
+            const cost = 20;
+            if (score >= cost || score === Infinity) {
+                if (score !== Infinity) score -= cost;
+                basePointsPerClick = 5;
+                updateScoreDisplay();
+                itemAmplifier.style.display = 'none';
+                checkShopVisibilityAndItems();
+            }
+        }
+
+        function buySatellite() {
+            const cost = 100;
+            if (score >= cost || score === Infinity) {
+                if (score !== Infinity) score -= cost;
+                pointsPerSecond += 10;
+                updateScoreDisplay();
+                itemSatellite.style.display = 'none';
+                satelliteElement.style.display = 'block';
+                checkShopVisibilityAndItems();
+            }
+        }
+
+        function buySunClicker() {
+            const cost = 500;
+            if (score >= cost || score === Infinity) {
+                if (score !== Infinity) score -= cost;
+                basePointsPerClick *= 10;
+                updateScoreDisplay();
+                itemSunClicker.style.display = 'none';
+                checkShopVisibilityAndItems();
+            }
+        }
+
+        function increaseScorePerSecond() {
+            if (score !== Infinity) {
+                 score += pointsPerSecond * clickMultiplier;
+            }
+            updateScoreDisplay();
+            checkShopVisibilityAndItems();
+            checkRebirthUnlock();
+        }
+
+        function createStars() {
+            const numStars = 100;
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = `${Math.random() * 3 + 1}px`;
+                star.style.height = star.style.width;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                starContainer.appendChild(star);
+            }
+        }
+
+        function getRebirthCost() {
+            return baseRebirthCost + (rebirthCount * 5000);
+        }
+
+        function openRebirthScreen() {
+            const cost = getRebirthCost();
+            if (score >= cost || score === Infinity) {
+                document.getElementById('rebirth-cost-display').textContent = cost.toLocaleString();
+                document.getElementById('current-multi-display').textContent = `${clickMultiplier}x`;
+                document.getElementById('new-multi-display').textContent = `${clickMultiplier + 10}x`;
+                rebirthScreen.style.display = 'flex';
+            } else {
+                alert(`You need ${cost.toLocaleString()} points to rebirth!`);
+                checkRebirthUnlock();
+            }
+        }
+
+        function closeRebirthScreen() {
+            rebirthScreen.style.display = 'none';
+        }
+
+        function confirmRebirth() {
+            const cost = getRebirthCost();
+            if (score >= cost || score === Infinity) {
+                score = 0;
+                rebirthCount++;
+                clickMultiplier += 10;
+
+                basePointsPerClick = 1;
+                pointsPerSecond = 0;
+                itemAmplifier.style.display = 'flex';
+                itemSatellite.style.display = 'flex';
+                itemSunClicker.style.display = 'flex';
+                satelliteElement.style.display = 'none';
+                rebirthButton.style.display = 'none';
+
+                updateScoreDisplay();
+                checkShopVisibilityAndItems();
+                closeRebirthScreen();
+            } else {
+                alert("You can't afford the rebirth anymore!");
+                closeRebirthScreen();
+            }
+        }
+
+        // Keypad and Admin Functions
+        function openKeypadScreen() {
+            keypadInput.value = '';
+            keypadScreen.style.display = 'flex';
+        }
+
+        function closeKeypadScreen() {
+            keypadScreen.style.display = 'none';
+        }
+
+        function checkCode() {
+            if (keypadInput.value === correctCode) {
+                isAdminUnlocked = true;
+                adminMessage.style.display = 'block';
+                closeKeypadScreen();
+                alert("Admin menu unlocked! Press [G] to open and [R] to close.");
+            } else {
+                alert("Incorrect code.");
+            }
+        }
+
+        function giveInfPoints() {
+            score = Infinity;
+            updateScoreDisplay();
+            checkShopVisibilityAndItems();
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (isAdminUnlocked) {
+                if (event.key === 'g' || event.key === 'G') {
+                    adminMenu.style.display = 'flex';
+                } else if (event.key === 'r' || event.key === 'R') {
+                    adminMenu.style.display = 'none';
+                }
+            }
+        });
+
+        moonButton.addEventListener('click', clickMoon);
+        setInterval(increaseScorePerSecond, 1000);
+        checkShopVisibilityAndItems();
+        createStars();
+        updateScoreDisplay();
+    </script>
+</body>
+</html>
